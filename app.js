@@ -16,9 +16,7 @@ var commentRoutes = require('./routes/comments')
 var campgroundRoutes = require('./routes/campgrounds')
 var indexRoutes = require('./routes/index')
 
-var port = 4800;
-
-mongoose.connect("mongodb://localhost:27800/yelp_camp_v12");
+mongoose.connect("mongodb://localhost:27900/yelp_camp_v12_deployed");
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -53,6 +51,6 @@ app.use('/campgrounds/:id/comments', commentRoutes);
 app.use('/campgrounds', campgroundRoutes); // adding the '/campgrounds' PREFIX upends '/campgrounds' in the campgrounds.js code. 
 app.use('/', indexRoutes);
 
-app.listen(port, function () {
-    console.log('YelpCamp server has started.')
-})
+app.listen(process.env.PORT || 4900, function(){
+    console.log("The Server Has Started!");
+ });
